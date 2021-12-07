@@ -62,13 +62,13 @@ LABELS = open(labelsPath).read().strip().split("\n")
 
 np.random.seed(42)
 
-# weightsPath = "./yolov3.weights"
-# configPath = "./yolov3.cfg"
+weightsPath = "./yolov3.weights"
+configPath = "./yolov3.cfg"
 
 ###### use this for faster processing (caution: slighly lower accuracy) ###########
 
-weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
-configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
+# weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
+# configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
 
 
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
@@ -241,6 +241,7 @@ while True:
         FR[0:H, 0:W] = frame
         frame = FR
         cv2.imshow('Social distancing analyser', frame)
+        
         cv2.waitKey(1)
 
     if writer is None:
