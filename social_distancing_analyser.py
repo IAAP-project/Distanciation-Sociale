@@ -6,7 +6,7 @@ import numpy as np
 confid = 0.5
 thresh = 0.5
 
-vid_path = "./videos/video_test5.mp4"
+vid_path = "./videos/video_test7.mp4"
 
 
 # Calibration needed for each video
@@ -42,7 +42,10 @@ configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/bl
 
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
-ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+#ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+
+
+ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
 vs = cv2.VideoCapture(vid_path)
 writer = None

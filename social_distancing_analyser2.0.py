@@ -62,21 +62,24 @@ LABELS = open(labelsPath).read().strip().split("\n")
 
 np.random.seed(42)
 
-weightsPath = "./yolov3.weights"
-configPath = "./yolov3.cfg"
+# weightsPath = "./yolov3.weights"
+# configPath = "./yolov3.cfg"
 
 ###### use this for faster processing (caution: slighly lower accuracy) ###########
 
-# weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
-# configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
+weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
+configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
 
 
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
-ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+#ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
+
+
 FR=0
 vs = cv2.VideoCapture(vid_path)
-# vs = cv2.VideoCapture(0)  ## USe this if you want to use webcam feed
+#vs = cv2.VideoCapture(0)  ## USe this if you want to use webcam feed
 writer = None
 (W, H) = (None, None)
 
