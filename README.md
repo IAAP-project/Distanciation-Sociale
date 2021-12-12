@@ -7,8 +7,10 @@ La détection se fait en temps réel et permets de couvrir les petits comme le g
 
 ## Resultat obtenu : 
 ![](op2.gif)
-![](op_video_test7.mp4)
-![](op_Airport_q3.mp4)
+
+![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/op_video_test7.mp4)
+
+![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/op_Airport_q3.mp4)
 
 
 ## Installation :
