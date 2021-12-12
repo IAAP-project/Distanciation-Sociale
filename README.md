@@ -8,9 +8,9 @@ La détection se fait en temps réel et permets de couvrir les petits comme le g
 ## Resultat obtenu : 
 ![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/output/output/op2.gif)
 
-![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/output/op_video_test7.mp4)
+![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/output/output/op_video_test3.gif)
 
-![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/output/op_Airport_q3.mp4)
+![](https://github.com/IAAP-project/Distanciation-Sociale/blob/main/output/output/op_Airport_q3.gif)
 
 
 ## Installation :
