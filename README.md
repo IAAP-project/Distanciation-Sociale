@@ -23,7 +23,7 @@ La détection se fait en temps réel et permets de couvrir les petits comme le g
    - https://pjreddie.com/media/files/yolov3.weights
 * Pour des CPUs plus lents, nous vous recommandons d'utiliser le fichier yolov3-tiny.cfg (link in the code comments) plutôt que le yolov3.cfg 
 * Installer toutes les  dependences avec : 
-  > $ pip3 install requirements.txt
+  > $ pip3 install -r requirements.txt
 
 * Execution du fichier source
 > $ python3 social_distancing_analyser2.0.py
@@ -31,4 +31,5 @@ La détection se fait en temps réel et permets de couvrir les petits comme le g
 
 # Authors : 
 menbres du projet G1-G2 IAAP, fait à Centrale Lille de Novembre 20 - Fevrier 22.
+
 Contact : projetiaap@gmail.com
