@@ -29,7 +29,7 @@ La détection se fait en temps réel et permets de couvrir les petits comme le g
 > $ python3 social_distancing_analyser2.0.py
 
 
-# Authors : 
+# Auteurs : 
 menbres du projet G1-G2 IAAP, fait à Centrale Lille de Novembre 20 - Fevrier 22.
 
 Contact : projetiaap@gmail.com
