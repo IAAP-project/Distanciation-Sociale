@@ -5,10 +5,10 @@ import numpy as np
 
 confid = 0.5
 thresh = 0.5
-# vname=""
-vname=input("Video name in videos folder:  ")
+vname=""
+#vname=input("Video name in videos folder:  ")
 if(vname==""):
-    vname="video_test.mp4"
+    vname="video_test3.mp4"
 vid_path = "./videos/"+vname
 angle_factor = 0.8
 H_zoom_factor = 1.2
@@ -62,8 +62,8 @@ LABELS = open(labelsPath).read().strip().split("\n")
 
 np.random.seed(42)
 
-weightsPath = "./yolov3.weights"
-configPath = "./yolov3.cfg"
+weightsPath = "./yolov3-tiny.weights"
+configPath = "./yolov3-tiny.cfg"
 
 ###### use this for faster processing (caution: slighly lower accuracy) ###########
 
@@ -73,8 +73,8 @@ configPath = "./yolov3.cfg"
 
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
-#ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
+ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+#ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
 FR=0
