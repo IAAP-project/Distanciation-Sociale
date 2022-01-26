@@ -5,16 +5,17 @@ import numpy as np
 
 confid = 0.5
 thresh = 0.5
-vname=""
-#vname=input("Video name in videos folder:  ")
+# vname=""
+vname=input("Video name in videos folder:  ")
 if(vname==""):
-    vname="video_test3.mp4"
+    vname="video_test.mp4"
 vid_path = "./videos/"+vname
 angle_factor = 0.8
 H_zoom_factor = 1.2
 # Calibration needed for each video
 
-def dist(c1, c2):
+def dist(c1, c2): 
+    # Distance euclidienne 
     return ((c1[0] - c2[0]) ** 2 + (c1[1] - c2[1]) ** 2) ** 0.5
 
 def T2S(T):
@@ -62,19 +63,19 @@ LABELS = open(labelsPath).read().strip().split("\n")
 
 np.random.seed(42)
 
-weightsPath = "./yolov3-tiny.weights"
-configPath = "./yolov3-tiny.cfg"
+# weightsPath = "./yolov3.weights"
+# configPath = "./yolov3.cfg"
 
 ###### use this for faster processing (caution: slighly lower accuracy) ###########
 
-# weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
-# configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
+weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
+configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
 
 
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 ln = net.getLayerNames()
-ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-#ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
+#ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
 FR=0
@@ -131,7 +132,7 @@ while True:
                 if confidence > confid:
                     box = detection[0:4] * np.array([W, H, W, H])
                     (centerX, centerY, width, height) = box.astype("int")
-
+                    print(centerX)
                     x = int(centerX - (width / 2))
                     y = int(centerY - (height / 2))
 
@@ -139,8 +140,7 @@ while True:
                     confidences.append(float(confidence))
                     classIDs.append(classID)
 
-    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confid, thresh)
-
+    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confid, thresh) #liste de nb de b-ingBoxes et leur score
     if len(idxs) > 0:
 
         status = []
