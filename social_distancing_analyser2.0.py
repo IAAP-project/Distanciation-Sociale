@@ -5,14 +5,8 @@ import numpy as np
 
 confid = 0.5
 thresh = 0.5
-# vname=""
-vname=input("Video name in videos folder:  ")
-if(vname==""):
-    vname="video_test.mp4"
-vid_path = "./videos/"+vname
-angle_factor = 0.8
-H_zoom_factor = 1.2
-# Calibration needed for each video
+
+modeCam = input("\nTapez 1 pour entrer une video manuellement\nTapez 2 pour utiliser la camera\n\tChoix :")
 
 def dist(c1, c2): 
     # Distance euclidienne 
@@ -66,7 +60,7 @@ np.random.seed(42)
 # weightsPath = "./yolov3.weights"
 # configPath = "./yolov3.cfg"
 
-###### use this for faster processing (caution: slighly lower accuracy) ###########
+###########     Decommentez en dessous pour des processeurs plus rapides      ###########
 
 weightsPath = "./yolov3-tiny.weights"  ## https://pjreddie.com/media/files/yolov3-tiny.weights
 configPath = "./yolov3-tiny.cfg"       ## https://github.com/pjreddie/darknet/blob/master/cfg/yolov3-tiny.cfg
@@ -79,8 +73,24 @@ ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
 FR=0
-vs = cv2.VideoCapture(vid_path)
-#vs = cv2.VideoCapture(0)  ## USe this if you want to use webcam feed
+
+if (int(modeCam) == 1):
+    print("-------    Mode lecture de vidéo    ------")
+    vname = input("Video name in videos folder:  ")
+    if(vname==""):
+        vname="video_test.mp4"
+    vid_path = "./videos/"+vname
+    angle_factor = 0.8
+    H_zoom_factor = 1.2
+    # Calibration needed for each video
+    vs = cv2.VideoCapture(vid_path)
+
+if (int(modeCam) == 2):
+    print("-------    Mode caméra    ------")
+    vname=""
+    vs = cv2.VideoCapture(0)  ## Pour utilisez la camera ( ordinateur != camera Pepper)
+
+
 writer = None
 (W, H) = (None, None)
 
@@ -184,14 +194,14 @@ while True:
 
         for i in idf:
             cv2.line(FR,(0,H+1),(FW,H+1),(0,0,0),2)
-            cv2.putText(FR, "Social Distancing Analyser wrt. COVID-19", (210, H+60),
+            cv2.putText(FR, "IAAP -- Distanciation Sociale --", (210, H+60),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             cv2.rectangle(FR, (20, H+80), (510, H+180), (100, 100, 100), 2)
             cv2.putText(FR, "Connecting lines shows closeness among people. ", (30, H+100),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (100, 100, 0), 2)
-            cv2.putText(FR, "-- YELLOW: CLOSE", (50, H+90+40),
+            cv2.putText(FR, "-- JAUNE: PROCHE", (50, H+90+40),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 170, 170), 2)
-            cv2.putText(FR, "--    RED: VERY CLOSE", (50, H+40+110),
+            cv2.putText(FR, "-- ROUGE: TROP PROCHE", (50, H+40+110),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
             # cv2.putText(frame, "--    PINK: Pathway for Calibration", (50, 150),
             #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (180,105,255), 1)
@@ -208,10 +218,10 @@ while True:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 150, 0), 2)
 
             
-            tot_str = "TOTAL COUNT: " + str(total_p)
-            high_str = "HIGH RISK COUNT: " + str(high_risk_p)
-            low_str = "LOW RISK COUNT: " + str(low_risk_p)
-            safe_str = "SAFE COUNT: " + str(safe_p)
+            tot_str = "TOTAL D'INDIVIDUS: " + str(total_p)
+            high_str = "NB RISQUES ELEVES: " + str(high_risk_p)
+            low_str = "NB RISQUES FAIBLES: " + str(low_risk_p)
+            safe_str = "NB D'INDIVIDUS EN SECURITE: " + str(safe_p)
 
             cv2.putText(FR, tot_str, (10, H +25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
