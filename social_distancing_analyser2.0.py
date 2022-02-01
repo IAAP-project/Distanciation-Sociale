@@ -77,8 +77,6 @@ FR=0
 if (int(modeCam) == 1):
     print("-------    Mode lecture de vidéo    ------")
     vname = input("Video name in videos folder:  ")
-    if(vname==""):
-        vname="video_test.mp4"
     vid_path = "./videos/"+vname
     angle_factor = 0.8
     H_zoom_factor = 1.2
@@ -87,7 +85,10 @@ if (int(modeCam) == 1):
 
 if (int(modeCam) == 2):
     print("-------    Mode caméra    ------")
-    vname=""
+    vname="video_test.mp4"
+    vid_path = "./videos/"+vname
+    angle_factor = 0.8
+    H_zoom_factor = 1.2
     vs = cv2.VideoCapture(0)  ## Pour utilisez la camera ( ordinateur != camera Pepper)
 
 
@@ -142,7 +143,6 @@ while True:
                 if confidence > confid:
                     box = detection[0:4] * np.array([W, H, W, H])
                     (centerX, centerY, width, height) = box.astype("int")
-                    print(centerX)
                     x = int(centerX - (width / 2))
                     y = int(centerY - (height / 2))
 
@@ -197,40 +197,48 @@ while True:
             cv2.putText(FR, "IAAP -- Distanciation Sociale --", (210, H+60),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             cv2.rectangle(FR, (20, H+80), (510, H+180), (100, 100, 100), 2)
-            cv2.putText(FR, "Connecting lines shows closeness among people. ", (30, H+100),
+            cv2.putText(FR, "Les liaisons mettent en évidence la distanciation", (30, H+100),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (100, 100, 0), 2)
-            cv2.putText(FR, "-- JAUNE: PROCHE", (50, H+90+40),
+            cv2.putText(FR, "-- JAUNE: PROXIMITE FAIBLE", (50, H+90+40),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 170, 170), 2)
-            cv2.putText(FR, "-- ROUGE: TROP PROCHE", (50, H+40+110),
+            cv2.putText(FR, "-- ROUGE: PROXIMITE ELEVEE", (50, H+40+110),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
             # cv2.putText(frame, "--    PINK: Pathway for Calibration", (50, 150),
             #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (180,105,255), 1)
 
             cv2.rectangle(FR, (535, H+80), (1060, H+140+40), (100, 100, 100), 2)
-            cv2.putText(FR, "Bounding box shows the level of risk to the person.", (545, H+100),
+            cv2.putText(FR, "Les boites montrent le degres de risque", (545, H+100),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (100, 100, 0), 2)
-            cv2.putText(FR, "-- DARK RED: HIGH RISK", (565, H+90+40),
+            cv2.putText(FR, "-- BORDEAUX: RISQUE ELEVEE", (565, H+90+40),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 150), 2)
-            cv2.putText(FR, "--   ORANGE: LOW RISK", (565, H+150),
+            cv2.putText(FR, "-- ORANGE: RISQUE", (565, H+150),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 120, 255), 2)
 
-            cv2.putText(FR, "--    GREEN: SAFE", (565, H+170),
+            cv2.putText(FR, "-- VERT: SAFE", (565, H+170),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 150, 0), 2)
 
             
-            tot_str = "TOTAL D'INDIVIDUS: " + str(total_p)
+            tot_str = "TOTAL: " + str(total_p)
             high_str = "NB RISQUES ELEVES: " + str(high_risk_p)
             low_str = "NB RISQUES FAIBLES: " + str(low_risk_p)
-            safe_str = "NB D'INDIVIDUS EN SECURITE: " + str(safe_p)
+            safe_str = "NB EN SECURITE: " + str(safe_p)
 
             cv2.putText(FR, tot_str, (10, H +25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
-            cv2.putText(FR, safe_str, (200, H +25),
+            cv2.putText(FR, safe_str, (160, H +25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 170, 0), 2)
-            cv2.putText(FR, low_str, (380, H +25),
+            cv2.putText(FR, low_str, (420, H +25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 120, 255), 2)
-            cv2.putText(FR, high_str, (630, H +25),
+            cv2.putText(FR, high_str, (700, H +25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 150), 2)
+            
+            x = 1500
+            y = H + 25
+            
+            logo = cv2.imread('logo_IAAP.png')
+            img_height, img_width, _ = logo.shape
+
+            FR[ y:y+img_height , x:x+img_width ] = logo
 
             (x, y) = (boxes[i][0], boxes[i][1])
             (w, h) = (boxes[i][2], boxes[i][3])
