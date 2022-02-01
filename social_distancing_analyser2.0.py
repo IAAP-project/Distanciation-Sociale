@@ -197,7 +197,7 @@ while True:
             cv2.putText(FR, "IAAP -- Distanciation Sociale --", (210, H+60),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             cv2.rectangle(FR, (20, H+80), (510, H+180), (100, 100, 100), 2)
-            cv2.putText(FR, "Les liaisons mettent en évidence la distanciation", (30, H+100),
+            cv2.putText(FR, "Les liaisons mettent en evidence la distanciation", (30, H+100),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (100, 100, 0), 2)
             cv2.putText(FR, "-- JAUNE: PROXIMITE FAIBLE", (50, H+90+40),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 170, 170), 2)
